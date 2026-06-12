@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuwaijri Real Estate | التويجري العقارية - Luxury Properties in Saudi Arabia</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Kufi+Arabic:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Tailwind Configuration & Custom CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        arabic: ['Noto Kufi Arabic', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0F172A', // Deep Charcoal
+                            gold: '#C5A059', // Elegant Gold
+                            light: '#F8F9FA', // Off-white
+                            red: '#8B1014', // Deep red inspired by building logo
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.1)',
+                        'premium': '0 20px 40px -10px rgba(0,0,0,0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles for premium feel */
+        body {
+            background-color: #F8F9FA;
+            color: #0F172A;
+        }
+        
+        /* Elegant Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C5A059; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A68444; 
+        }
+
+        /* Glassmorphism utility */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .glass-panel-dark {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Image hover zoom effect */
+        .img-hover-zoom {
+            overflow: hidden;
+        }
+        .img-hover-zoom img {
+            transition: transform 0.7s ease;
+        }
+        .img-hover-zoom:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Text gradient */
+        .text-gradient {
+            background: linear-gradient(to right, #C5A059, #E5C88B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 py-4" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-full px-6 py-3 flex justify-between items-center shadow-sm transition-all">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="flex flex-col">
+                        <span class="font-serif font-bold text-xl tracking-wider text-brand-dark leading-none">TUWAIJRI</span>
+                        <span class="font-sans text-[10px] tracking-widest text-brand-red uppercase font-semibold">Real Estate</span>
+                    </div>
+                    <div class="h-8 w-px bg-gray-300 mx-2"></div>
+                    <span class="font-arabic font-semibold text-lg text-brand-dark pt-1">التويجري العقارية</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-sm font-medium hover:text-brand-gold transition-colors">Home</a>
+                    <a href="#about" class="text-sm font-medium hover:text-brand-gold transition-colors">About</a>
+                    <a href="#properties" class="text-sm font-medium hover:text-brand-gold transition-colors">Properties</a>
+                    <a href="#services" class="text-sm font-medium hover:text-brand-gold transition-colors">Services</a>
+                    <a href="#contact" class="text-sm font-medium hover:text-brand-gold transition-colors">Contact</a>
+                </div>
+
+                <!-- CTA & Lang -->
+                <div class="hidden md:flex items-center gap-4">
+                    <button class="text-sm font-medium text-gray-500 hover:text-brand-dark transition-colors flex items-center gap-1">
+                        <i class="ph ph-globe text-lg"></i> EN
+                    </button>
+                    <a href="#contact" class="bg-brand-dark text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-brand-gold transition-all duration-300 shadow-md hover:shadow-lg">
+                        List Property
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-brand-dark hover:text-brand-gold focus:outline-none">
+                        <i class="ph ph-list text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full px-4 mt-2">
+            <div class="glass-panel rounded-2xl p-4 flex flex-col space-y-4 shadow-lg">
+                <a href="#home" class="text-base font-medium hover:text-brand-gold">Home</a>
+                <a href="#about" class="text-base font-medium hover:text-brand-gold">About</a>
+                <a href="#properties" class="text-base font-medium hover:text-brand-gold">Properties</a>
+                <a href="#services" class="text-base font-medium hover:text-brand-gold">Services</a>
+                <a href="#contact" class="text-base font-medium hover:text-brand-gold">Contact</a>
+                <hr class="border-gray-200">
+                <a href="#contact" class="bg-brand-dark text-white text-center px-6 py-3 rounded-xl text-sm font-medium">List Property</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="relative h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+        <!-- Background Image (Using client's luxury pool image as lifestyle placeholder) -->
+        <div class="absolute inset-0 w-full h-full">
+            <img src="image_be2a6d.jpg" alt="Luxury Real Estate Saudi Arabia" class="object-cover w-full h-full object-center" />
+            <!-- Overlay to ensure text readability -->
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/70 via-brand-dark/50 to-brand-dark/80"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto w-full mt-16" data-aos="fade-up" data-aos-duration="1000">
+            <span class="text-brand-gold uppercase tracking-[0.3em] text-sm font-semibold mb-4 block">Premium Real Estate Agency</span>
+            <h1 class="font-serif text-5xl md:text-7xl text-white font-bold mb-4 leading-tight">
+                Discover Luxury Living in <br class="hidden md:block"/> <span class="text-gradient">Saudi Arabia</span>
+            </h1>
+            <h2 class="font-arabic text-2xl md:text-4xl text-white/90 mb-8 font-semibold">
+                اكتشف الفخامة في المملكة العربية السعودية
+            </h2>
+            <p class="text-gray-200 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-light">
+                Exclusive properties, unmatched expertise, and premium services tailored for discerning clients in Riyadh and beyond.
+            </p>
+        </div>
+
+        <!-- Floating Search Bar -->
+        <div class="absolute -bottom-16 left-0 right-0 px-4 z-20" data-aos="fade-up" data-aos-delay="300">
+            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-premium p-2 md:p-4 flex flex-col md:flex-row gap-4 items-center">
+                
+                <div class="flex-1 w-full flex items-center px-4 py-3 md:py-0 border-b md:border-b-0 md:border-r border-gray-100">
+                    <i class="ph ph-map-pin text-brand-gold text-xl mr-3"></i>
+                    <div class="flex-1">
+                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Location</label>
+                        <select class="w-full bg-transparent border-none focus:ring-0 text-brand-dark font-medium cursor-pointer outline-none appearance-none">
+                            <option>Riyadh (Al-Manakh)</option>
+                            <option>Jeddah</option>
+                            <option>Dammam</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex-1 w-full flex items-center px-4 py-3 md:py-0 border-b md:border-b-0 md:border-r border-gray-100">
+                    <i class="ph ph-house text-brand-gold text-xl mr-3"></i>
+                    <div class="flex-1">
+                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Property Type</label>
+                        <select class="w-full bg-transparent border-none focus:ring-0 text-brand-dark font-medium cursor-pointer outline-none appearance-none">
+                            <option>Luxury Villa</option>
+                            <option>Premium Apartment</option>
+                            <option>Commercial Space</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex-1 w-full flex items-center px-4 py-3 md:py-0">
+                    <i class="ph ph-currency-circle-dollar text-brand-gold text-xl mr-3"></i>
+                    <div class="flex-1">
+                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Price Range</label>
+                        <select class="w-full bg-transparent border-none focus:ring-0 text-brand-dark font-medium cursor-pointer outline-none appearance-none">
+                            <option>Any Price</option>
+                            <option>1M - 5M SAR</option>
+                            <option>5M+ SAR</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="w-full md:w-auto bg-brand-dark text-white px-8 py-4 rounded-xl font-medium hover:bg-brand-gold transition-colors flex items-center justify-center gap-2 mt-2 md:mt-0">
+                    <i class="ph ph-magnifying-glass text-lg"></i>
+                    <span>Search</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Trust Stats Bar -->
+    <section class="pt-32 pb-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100">
+                <div data-aos="fade-up" data-aos-delay="0">
+                    <h3 class="text-4xl font-serif font-bold text-brand-dark mb-2">4.6<span class="text-brand-gold text-2xl">★</span></h3>
+                    <p class="text-sm text-gray-500 font-medium">Google Rating</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-4xl font-serif font-bold text-brand-dark mb-2">1,380+</h3>
+                    <p class="text-sm text-gray-500 font-medium">Satisfied Client Reviews</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-4xl font-serif font-bold text-brand-dark mb-2">10+</h3>
+                    <p class="text-sm text-gray-500 font-medium">Years of Excellence</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-4xl font-serif font-bold text-brand-dark mb-2">Riyadh</h3>
+                    <p class="text-sm text-gray-500 font-medium">Headquarters</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-brand-light overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <!-- Image side -->
+                <div class="w-full lg:w-1/2 relative" data-aos="fade-right">
+                    <div class="absolute -inset-4 bg-brand-gold/10 rounded-3xl transform rotate-3"></div>
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl img-hover-zoom">
+                        <!-- Using client's building exterior -->
+                        <img src="image_be2b21.jpg" alt="Tuwaijri Real Estate Office Building" class="w-full h-auto object-cover rounded-2xl" />
+                        
+                        <!-- Overlay floating card -->
+                        <div class="absolute bottom-6 left-6 glass-panel p-4 rounded-xl flex items-center gap-4 max-w-[250px]">
+                            <div class="bg-white p-3 rounded-full text-brand-gold shadow-sm">
+                                <i class="ph ph-buildings text-2xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-brand-dark">Al-Manakh, Riyadh</p>
+                                <p class="text-xs text-gray-600">Established Headquarters</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text side -->
+                <div class="w-full lg:w-1/2" data-aos="fade-left">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="h-[2px] w-12 bg-brand-gold"></div>
+                        <span class="text-brand-gold uppercase tracking-widest text-sm font-semibold">About Us</span>
+                    </div>
+                    <h2 class="font-serif text-4xl md:text-5xl text-brand-dark font-bold mb-6">
+                        Building Trust Through <span class="italic text-brand-gold">Excellence</span>
+                    </h2>
+                    <h3 class="font-arabic text-2xl text-gray-700 mb-6 font-semibold">
+                        نبني الثقة من خلال التميز
+                    </h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Located in the heart of Riyadh, Tuwaijri Real Estate (التويجري العقارية) is a premier agency dedicated to providing exceptional property services. With a legacy built on integrity and market expertise, we guide our clients through every step of their real estate journey.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Whether you are seeking a luxury villa, a strategic commercial investment, or comprehensive property management, our highly rated team ensures a seamless and professional experience tailored to your unique needs.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="bg-brand-dark text-white px-8 py-4 rounded-full text-center font-medium hover:bg-brand-gold transition-colors duration-300">
+                            Consult with an Expert
+                        </a>
+                        <div class="flex items-center gap-4 px-4 py-2 border border-gray-200 rounded-full bg-white">
+                            <div class="flex -space-x-2">
+                                <!-- Placeholder avatars for social proof -->
+                                <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="Agent">
+                                <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="Agent">
+                                <img class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=100&q=80" alt="Agent">
+                            </div>
+                            <span class="text-sm font-medium text-gray-600">Meet our team</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <span class="text-brand-gold uppercase tracking-widest text-sm font-semibold mb-3 block">Our Expertise</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-brand-dark font-bold mb-4">Comprehensive Real Estate Solutions</h2>
+                <p class="text-gray-500">Delivering premium services with unmatched professionalism in the Saudi market.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="group p-8 rounded-2xl bg-brand-light border border-gray-100 hover:shadow-premium hover:border-brand-gold/30 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-brand-gold transition-colors duration-300">
+                        <i class="ph ph-key text-3xl text-brand-dark group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3">Property Sales</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Expert guidance in buying and selling premium residential and commercial properties.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="group p-8 rounded-2xl bg-brand-light border border-gray-100 hover:shadow-premium hover:border-brand-gold/30 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-brand-gold transition-colors duration-300">
+                        <i class="ph ph-handshake text-3xl text-brand-dark group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3">Property Rentals</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Curated selection of high-end leasing options for individuals and corporations.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="group p-8 rounded-2xl bg-brand-light border border-gray-100 hover:shadow-premium hover:border-brand-gold/30 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-brand-gold transition-colors duration-300">
+                        <i class="ph ph-chart-line-up text-3xl text-brand-dark group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3">Investment Consulting</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Strategic advice to maximize returns on your real estate portfolio in Saudi Arabia.</p>
+                </div>
+                <!-- Service 4 -->
+                <div class="group p-8 rounded-2xl bg-brand-light border border-gray-100 hover:shadow-premium hover:border-brand-gold/30 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-brand-gold transition-colors duration-300">
+                        <i class="ph ph-buildings text-3xl text-brand-dark group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3">Property Management</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Comprehensive management services ensuring peace of mind for property owners.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section id="properties" class="py-24 bg-brand-dark relative">
+        <!-- Subtle background pattern -->
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6" data-aos="fade-up">
+                <div>
+                    <span class="text-brand-gold uppercase tracking-widest text-sm font-semibold mb-3 block">Exclusive Listings</span>
+                    <h2 class="font-serif text-4xl md:text-5xl text-white font-bold">Featured Properties</h2>
+                </div>
+                <a href="#" class="group flex items-center gap-2 text-white hover:text-brand-gold transition-colors pb-2 border-b border-white/20 hover:border-brand-gold">
+                    <span>View All Properties</span>
+                    <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Property Card 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="0">
+                    <div class="relative h-64 overflow-hidden">
+                        <!-- Placeholder high-end property image -->
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" alt="Villa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 left-4 bg-brand-dark text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide z-10">For Sale</div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                            <p class="text-brand-gold font-serif text-2xl font-bold">SAR 4,500,000</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-brand-dark mb-2 group-hover:text-brand-gold transition-colors">Modern Luxury Villa</h3>
+                        <p class="text-gray-500 text-sm mb-4 flex items-center gap-2">
+                            <i class="ph ph-map-pin text-brand-red"></i> Al-Malqa, Riyadh
+                        </p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                            <div class="flex items-center gap-2 text-gray-600 text-sm font-medium">
+                                <i class="ph ph-bed text-lg"></i> 5 Beds
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-600 text-sm font-medium">
+                                <i class="ph ph-bathtub text-lg"></i> 6 Baths
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-600 text-sm font-medium">
+                                <i class="ph ph-squares-four text-lg"></i> 450 m²
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Apartment" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 left-4 bg-brand-gold text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide z-10">For Rent</div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                            <p class="text-brand-gold font-serif text-2xl font-bold">SAR 120,000 / yr</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-brand-dark mb-2 group-hover:text-brand-gold transition-colors">Premium Penthouse</h3>
+                        <p class="text-gray-500 text-sm mb-4 flex items-center gap-2">
+                            <i class="ph ph-map-pin text-brand-red"></i> Al-Olaya, Riyadh
+                        </p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                            <div class="flex items-center gap-2 text-gray-600 text-sm font-medium">
+                                <i class="ph ph-bed text-lg"></i> 3 Beds
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-600 text-sm font-medium">
+                                <i class="ph ph-bathtub text-lg"></i> 4 Baths
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-600 text-sm font-medium">
+                                <i class="ph ph-squares-four text-lg"></i> 280 m²
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative h-64 overflow-hidden">
+                        <!-- Using client pool image for a resort/luxury property vibe -->
+                        <img src="image_be2a6d.jpg" alt="Resort Villa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 left-4 bg-brand-dark text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide z-10">For Sale</div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                            <p class="text-brand-gold font-serif text-2xl font-bold">Price on Request</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-brand-dark mb-2 group-hover:text-brand-gold transition-colors">Exclusive Resort Villa</h3>
+                        <p class="text-gray-500 text-sm mb-4 flex items-center gap-2">
+                            <i class="ph ph-map-pin text-brand-red"></i> Diplomatic Quarter
+                        </p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                            <div class="flex items-center gap-2 text-gray-600 text-sm font-medium">
+                                <i class="ph ph-bed text-lg"></i> 6 Beds
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-600 text-sm font-medium">
+                                <i class="ph ph-bathtub text-lg"></i> 8 Baths
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-600 text-sm font-medium">
+                                <i class="ph ph-squares-four text-lg"></i> 850 m²
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 bg-brand-light overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <span class="text-brand-gold uppercase tracking-widest text-sm font-semibold mb-3 block">Client Success Stories</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-brand-dark font-bold mb-4">What Our Clients Say</h2>
+                <div class="flex items-center justify-center gap-2 text-brand-gold mb-2">
+                    <i class="ph-fill ph-star text-2xl"></i>
+                    <i class="ph-fill ph-star text-2xl"></i>
+                    <i class="ph-fill ph-star text-2xl"></i>
+                    <i class="ph-fill ph-star text-2xl"></i>
+                    <i class="ph-fill ph-star-half text-2xl"></i>
+                </div>
+                <p class="text-gray-500 font-medium">Based on 1,385+ authentic Google Reviews</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 relative" data-aos="fade-up" data-aos-delay="0">
+                    <i class="ph-fill ph-quotes text-4xl text-brand-gold/20 absolute top-6 right-6"></i>
+                    <div class="flex items-center gap-1 text-brand-gold mb-4">
+                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"Great service and very professional team. They helped me find exactly what I was looking for. Highly recommended."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-brand-dark text-white rounded-full flex items-center justify-center font-bold">B</div>
+                        <div>
+                            <p class="font-bold text-brand-dark text-sm">Bader Almutairi</p>
+                            <p class="text-xs text-gray-400">Local Guide</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 relative" data-aos="fade-up" data-aos-delay="100">
+                    <i class="ph-fill ph-quotes text-4xl text-brand-gold/20 absolute top-6 right-6"></i>
+                    <div class="flex items-center gap-1 text-brand-gold mb-4">
+                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"Excellent services... let you feel that you are one of their own staff. Truly respectable office with good treatment."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-brand-dark text-white rounded-full flex items-center justify-center font-bold">M</div>
+                        <div>
+                            <p class="font-bold text-brand-dark text-sm">Mohamad Abdoun</p>
+                            <p class="text-xs text-gray-400">Client</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 relative" data-aos="fade-up" data-aos-delay="200">
+                    <i class="ph-fill ph-quotes text-4xl text-brand-gold/20 absolute top-6 right-6"></i>
+                    <div class="flex items-center gap-1 text-brand-gold mb-4">
+                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"Best service. The elegant dealing and knowledge of the Al-Manakh neighborhood makes them stand out from the rest."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-brand-dark text-white rounded-full flex items-center justify-center font-bold">M</div>
+                        <div>
+                            <p class="font-bold text-brand-dark text-sm">mahmoud tuhaimer</p>
+                            <p class="text-xs text-gray-400">Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Location -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                
+                <!-- Contact Info & Images -->
+                <div data-aos="fade-right">
+                    <span class="text-brand-gold uppercase tracking-widest text-sm font-semibold mb-3 block">Get in Touch</span>
+                    <h2 class="font-serif text-4xl md:text-5xl text-brand-dark font-bold mb-8">Visit Our Office</h2>
+                    
+                    <div class="flex flex-col gap-6 mb-10">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center shrink-0">
+                                <i class="ph ph-map-pin text-2xl text-brand-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-dark mb-1">Location</h4>
+                                <p class="text-gray-500 text-sm leading-relaxed">Southern Ring Branch Rd, Al-Manakh,<br>Riyadh 14311, Saudi Arabia</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center shrink-0">
+                                <i class="ph ph-phone text-2xl text-brand-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-dark mb-1">Direct Line</h4>
+                                <p class="text-gray-500 text-sm" dir="ltr">+966 55 117 1701</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center shrink-0">
+                                <i class="ph ph-clock text-2xl text-brand-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-dark mb-1">Business Hours</h4>
+                                <p class="text-gray-500 text-sm">Opens 4:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interior Photo -->
+                    <div class="rounded-2xl overflow-hidden shadow-lg relative group">
+                        <img src="image_be2aa9.jpg" alt="Tuwaijri Real Estate Interior" class="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-colors duration-300"></div>
+                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-lg shadow-sm">
+                            <p class="font-bold text-brand-dark text-sm">Welcome to our office</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-brand-light p-8 md:p-10 rounded-3xl" data-aos="fade-left">
+                    <h3 class="font-serif text-2xl text-brand-dark font-bold mb-6">Send an Inquiry</h3>
+                    <form onsubmit="event.preventDefault(); document.getElementById('success-msg').classList.remove('hidden');" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold transition-colors" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold transition-colors" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                            <input type="tel" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold transition-colors" placeholder="+966 5X XXX XXXX">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">I am interested in</label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold transition-colors appearance-none bg-white">
+                                <option>Buying a Property</option>
+                                <option>Renting a Property</option>
+                                <option>Property Management</option>
+                                <option>Investment Consultation</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:border-brand-gold transition-colors" placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-dark text-white font-bold py-4 rounded-xl hover:bg-brand-gold transition-colors duration-300 shadow-md">
+                            Submit Inquiry
+                        </button>
+                        
+                        <div id="success-msg" class="hidden p-4 bg-green-50 text-green-700 rounded-xl text-sm font-medium text-center border border-green-200">
+                            Thank you! Your inquiry has been sent successfully. Our team will contact you shortly.
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark pt-20 pb-10 border-t-4 border-brand-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="col-span-1 lg:col-span-1">
+                    <div class="flex flex-col mb-6">
+                        <span class="font-serif font-bold text-2xl tracking-wider text-white leading-none">TUWAIJRI</span>
+                        <span class="font-sans text-xs tracking-widest text-brand-gold uppercase font-semibold">Real Estate</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        The premier destination for luxury real estate and investment consultation in Saudi Arabia, building trust since establishment.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand-gold transition-colors"><i class="ph ph-facebook-logo text-xl"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand-gold transition-colors"><i class="ph ph-instagram-logo text-xl"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-brand-gold transition-colors"><i class="ph ph-twitter-logo text-xl"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 font-serif">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-brand-gold text-sm transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-brand-gold text-sm transition-colors">About Us</a></li>
+                        <li><a href="#properties" class="text-gray-400 hover:text-brand-gold text-sm transition-colors">Featured Properties</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-brand-gold text-sm transition-colors">Our Services</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-brand-gold text-sm transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 font-serif">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-brand-gold text-sm transition-colors">Property Sales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-brand-gold text-sm transition-colors">Property Rentals</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-brand-gold text-sm transition-colors">Property Management</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-brand-gold text-sm transition-colors">Investment Consulting</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 font-serif">Contact Info</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="ph ph-map-pin text-brand-gold mt-1"></i>
+                            <span class="text-gray-400 text-sm">Al-Manakh, Riyadh 14311<br>Saudi Arabia</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="ph ph-phone text-brand-gold"></i>
+                            <span class="text-gray-400 text-sm" dir="ltr">+966 55 117 1701</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="ph ph-envelope-simple text-brand-gold"></i>
+                            <span class="text-gray-400 text-sm">info@tuwaijri-re.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2024 Tuwaijri Real Estate (التويجري العقارية). All rights reserved.</p>
+                <div class="flex gap-4 text-sm text-gray-500">
+                    <a href="#" class="hover:text-brand-gold">Privacy Policy</a>
+                    <a href="#" class="hover:text-brand-gold">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animate On Scroll
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+                navbar.querySelector('.glass-panel').classList.add('shadow-md');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+                navbar.querySelector('.glass-panel').classList.remove('shadow-md');
+            }
+        });
+
+        // Mobile menu toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
